@@ -20,10 +20,10 @@ class TabsPage extends StatelessWidget {
 class _Navigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final notificationProvider = Provider.of<NavigationProvider>(context);
+    final _navigationProvider = Provider.of<NavigationProvider>(context);
     return BottomNavigationBar(
-      currentIndex: notificationProvider.paginaActual,
-      onTap: (i) => notificationProvider.paginaActual = i,
+      currentIndex: _navigationProvider.paginaActual,
+      onTap: (i) => _navigationProvider.paginaActual = i,
       items: const [
         BottomNavigationBarItem(icon: Icon(Icons.access_alarm),label: "Title 1" ),
         BottomNavigationBarItem(icon: Icon(Icons.public),label: "Title 2" ),
@@ -35,7 +35,9 @@ class _Navigation extends StatelessWidget {
 class _Pages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _navigationProvider = Provider.of<NavigationProvider>(context);
     return PageView(
+      controller: _navigationProvider.pageController,
       physics: const NeverScrollableScrollPhysics(),
       children: [
         Container(color: Colors.red),
