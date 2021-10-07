@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 const urlNews   = "https://newsapi.org/v2";
 const apiKey    = "c9ad3355a18644ef9a1c04d5dee4d998";
-const country   = "us";
+const country   = "mx";
 
 class NewsService with ChangeNotifier{
   List<Article> headlines = [];
