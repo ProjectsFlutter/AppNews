@@ -10,6 +10,9 @@ const country   = "mx";
 
 class NewsService with ChangeNotifier{
   List<Article> headlines = [];
+  Map<String, List<Article>> categoryArticle = {};
+  String _selectedCategory = "business";
+
   List<Category> categories = [
     Category(FontAwesomeIcons.building, "business"),
     Category(FontAwesomeIcons.tv, "entertainment"),
@@ -22,12 +25,32 @@ class NewsService with ChangeNotifier{
    
   NewsService(){
     getTopHeadlines();
+    for (var category in categories) {
+      categoryArticle[category.name] = [];
+    }
   }
+
+  String get selectedCategory => _selectedCategory;
+  set selectedCategory(String category){
+    _selectedCategory = category; 
+    getArticlesByCategory(category);
+    notifyListeners();
+  }
+
   getTopHeadlines()async{
     const url = "$urlNews/top-headlines?apiKey=$apiKey&country=$country";
     final resp = await http.get(Uri.parse(url));
     final newsResponse = NewsResponse.fromJson(resp.body);
     headlines.addAll(newsResponse.articles);
+    notifyListeners();
+  } 
+
+  getArticlesByCategory(String category)async{
+    if (categoryArticle[category]!.isNotEmpty) return categoryArticle[category];
+    final url = "$urlNews/top-headlines?apiKey=$apiKey&country=$country&category=$category";
+    final resp = await http.get(Uri.parse(url));
+    final newsResponse = NewsResponse.fromJson(resp.body);
+    categoryArticle[category]!.addAll(newsResponse.articles);
     notifyListeners();
   } 
 }
