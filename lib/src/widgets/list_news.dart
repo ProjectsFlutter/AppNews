@@ -34,9 +34,6 @@ class _News extends StatelessWidget {
         _TargetBottons(),
         const SizedBox(height: 10.0),
         const Divider()
-
-
-
       ],
     );
   }

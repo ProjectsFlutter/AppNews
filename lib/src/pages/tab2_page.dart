@@ -15,7 +15,12 @@ class Tab2Page extends StatelessWidget {
         children: [
           _ListCategories(),
           Expanded(
-            child: ListNews(news: _serviceProvider.getCategoryArticleSelected)
+            child: (_serviceProvider.getCategoryArticleSelected!.isEmpty)
+            ? Container(
+              alignment: Alignment.center,
+              child: const CircularProgressIndicator()
+            ) 
+            :ListNews(news: _serviceProvider.getCategoryArticleSelected)
           )
         ],
       ),
@@ -29,7 +34,7 @@ class _ListCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     final _categories = Provider.of<NewsService>(context).categories;
     return SizedBox(
-      height: 80.0,
+      height: 100.0,
       width: double.infinity,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
@@ -41,7 +46,7 @@ class _ListCategories extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Column(
               children: [
-                _CategoruButton(_categories[i]),
+                _CategoryButton(_categories[i]),
                 const SizedBox(height: 5.0,),
                 Text("${nameCategory[0].toUpperCase()}${nameCategory.substring(1)}")
               ],
@@ -53,9 +58,9 @@ class _ListCategories extends StatelessWidget {
   }
 }
 
-class _CategoruButton extends StatelessWidget {
+class _CategoryButton extends StatelessWidget {
   final Category _category;
-  const _CategoruButton(this._category);
+  const _CategoryButton(this._category);
 
   @override
   Widget build(BuildContext context) {
