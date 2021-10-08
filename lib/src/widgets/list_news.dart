@@ -3,15 +3,15 @@ import 'package:app_news/src/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 class ListNews extends StatelessWidget {
-  final List<Article> news;
+  final List<Article>? news;
   const ListNews({required this.news});
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: news.length,
+      itemCount: news!.length,
       itemBuilder:(_, int i){
-        return _News(news: news[i], index:i);
+        return _News(news: news![i], index:i);
       }
     );
   }
