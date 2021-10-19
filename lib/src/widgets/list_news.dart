@@ -82,15 +82,17 @@ class _TargetImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(topLeft: Radius.circular(50.0), bottomRight: Radius.circular(50.0)),
         child: Container(
-          child: (url != null) ? FadeInImage(
-            placeholder: const AssetImage('assets/giphy.gif'),
-            image: NetworkImage(url!),
-          ): const Image(image: AssetImage('assets/no-image.png')),
+          child: (url != null) 
+          ? (Uri.parse(url!).isAbsolute)
+            ?FadeInImage(placeholder: const AssetImage('assets/giphy.gif'),image: NetworkImage(url!))
+            :const Image(image: AssetImage('assets/no-image.png'))
+          : const Image(image: AssetImage('assets/no-image.png')),
         ),
       ),
     );
