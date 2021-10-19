@@ -27,8 +27,8 @@ class _Navigation extends StatelessWidget {
       currentIndex: _navigationProvider.paginaActual,
       onTap: (i) => _navigationProvider.paginaActual = i,
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.access_alarm),label: "Title 1" ),
-        BottomNavigationBarItem(icon: Icon(Icons.public),label: "Title 2" ),
+        BottomNavigationBarItem(icon: Icon(Icons.public),label: "General" ),
+        BottomNavigationBarItem(icon: Icon(Icons.palette),label: "Secciones" ),
       ],
     );
   }
